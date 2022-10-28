@@ -1,0 +1,87 @@
+[project]
+name = "furo-myst-nb-css-fixes"
+version = "0.1.0"
+description = "A tiny wrapper around a few lines of CSS to better support the MyST-NB Jupyter notebook outputs with the Furo Sphinx theme."
+authors = [
+    {name = "Kai Norman Clasen", email= "k.clasen@protonmail.com"},
+]
+license = {text = "MIT license"}
+readme = "README.md"
+#- Uses the < syntax instead of <= because conda-forge does not work correctly with <=
+# deps-start
+requires-python = ">=3.8"
+dependencies = [
+    "sphinx>=4.5",
+]
+# deps-end
+
+[project.urls]
+homepage = "https://github.com/kai-tub/furo-myst-nb-css-fixes/"
+repository = "https://github.com/kai-tub/furo-myst-nb-css-fixes/"
+documentation = "https://kai-tub.github.io/furo-myst-nb-css-fixes"
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
+
+[tool.pdm.build]
+includes = [
+    "LICENSE",
+    "src",
+]
+
+[tool.pdm.dev-dependencies]
+docs = [
+    "myst-nb>=0.16",
+    "Sphinx>=4.5",
+    "sphinx-autobuild",
+    "sphinx-external-toc",
+    "linkify-it-py",
+    "furo",
+    "common-nb-preprocessors>=1",
+    "pandas>=1.5.1",
+]
+test = [
+    "pytest",
+    "pre-commit",
+    "jupyter",
+    "notebook",
+    "furo>=2022.9.29",
+]
+lint = [
+    "black[jupyter]",
+    "isort",
+    "nbstripout",
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.pdm.scripts]
+check-pre-commit = "pre-commit run --all-files"
+# check-types = "mypy src"
+
+lint.composite = [
+    "check-pre-commit",
+    # "check-types",
+]
+lint.help = "Will check if all files are formatted with black & isort"
+
+build-docs.cmd = "sphinx-build docs docs/_build/"
+build-docs.help = "Build Sphinx documentation"
+serve-sphinx-docs.cmd = "sphinx-autobuild docs docs/_build --open-browser"
+serve-sphinx-docs.help = "Serve the Sphinx documentation with sphinx-autobuild"
+
+tests = "pytest tests/"
+# If coverage is desired:
+# tests = "coverage run --parallel --source furo_myst_nb_css_fixes -m pytest tests"
+# coverage_report.composite = [
+#     "coverage combine",
+#     "coverage report --fail-under 95",
+# ]
+# coverage_html_report = "coverage html"
+# coverage_html.composite = [
+#     "tests",
+#     "coverage_html_report"
+# ]
+# coverage_html.help = "Run the coverage with pytest and produce the html"

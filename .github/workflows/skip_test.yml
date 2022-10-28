@@ -1,0 +1,17 @@
+name: Test
+on:
+  push:
+    branches: [main]
+    # Ignore all tests for now!
+    # paths-ignore:
+    #   - "furo_myst_nb_css_fixes/**"
+  pull_request:
+    branches: [main]
+    # paths-ignore:
+    #   - "furo_myst_nb_css_fixes/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No build required"'
