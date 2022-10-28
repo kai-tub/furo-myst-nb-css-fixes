@@ -1,0 +1,6 @@
+{
+  "pdm_version": "2.1.5",
+  "pdm_bin": "/home/runner/.local/bin/pdm",
+  "install_python_version": "3.8.10",
+  "install_location": "/home/runner/.local/share/pdm/venv"
+}
